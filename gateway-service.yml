@@ -22,12 +22,28 @@ spring:
         - Path=/organization/**
         filters:
         - RewritePath=/organization/(?<path>.*), /$\{path}
-      - id: openapi
-        uri: http://localhost:${server.port}
+        
+      - id: department-swagger
+        uri: lb://DEPARTMENT-SERVICE
         predicates:
-        - Path=/v3/api-docs/**
+        - Path=/v3/api-docs/department/**
         filters:
-        - RewritePath=/v3/api-docs/(?<path>.*), /$\{path}/v3/api-docs                       
+        - RewritePath=/v3/api-docs/(?<path>.*), /$\{path}/v3/api-docs
+                       
+      - id: employee-swagger
+        uri: lb://EMPLOYEE-SERVICE
+        predicates:
+        - Path=/v3/api-docs/employee/**
+        filters:
+        - RewritePath=/v3/api-docs/(?<path>.*), /$\{path}/v3/api-docs
+        
+      - id: organization-swagger
+        uri: lb://ORGANIZATION-SERVICE
+        predicates:
+        - Path=/v3/api-docs/organization/**
+        filters:
+        - RewritePath=/v3/api-docs/(?<path>.*), /$\{path}/v3/api-docs
+        
 server:
   port: 8082
 
@@ -42,6 +58,6 @@ eureka:
       
 springdoc:
   api-docs:
-    path: /v1/api-docs
+    path: /v3/api-docs
   swagger-ui:
     path: /
