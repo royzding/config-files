@@ -1,7 +1,16 @@
 spring:
   cloud:
     gateway:
-
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedHeaders: "*"
+            allowedMethods:
+              - GET
+              - POST
+              - DELETE
+              - OPTIONS
       routes:
       
       - id: department-service
@@ -13,6 +22,8 @@ spring:
         uri: lb://employee-service
         predicates:
         - Path=/employee/**
+        filters:
+        - AddRequestHeader=X-SVC-KEY, emp-1234-5678
 
       - id: organization-service
         uri: lb://organization-service
@@ -33,6 +44,7 @@ spring:
         predicates:
         - Path=/v3/api-docs/employee/**
         filters:
+        - AddRequestHeader=X-SVC-KEY, emp-1234-5678
         - RewritePath=/v3/api-docs/(?<path>.*), /$\{path}/v3/api-docs
         
       - id: organization-swagger
