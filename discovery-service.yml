@@ -9,3 +9,12 @@ eureka:
     fetchRegistry: false
     serviceUrl:
       defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+      
+app:
+  eureka-username: u
+  eureka-password: p
+
+auth:
+  svcKey: disc-1234-5678   
+
+environment: prod         
