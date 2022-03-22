@@ -29,7 +29,7 @@ app:
 auth:
   svcKey: webflux-mongodb-1234-5678  
   
-environment: prod 
+environment: dev 
 
 springdoc:
   open-api:
