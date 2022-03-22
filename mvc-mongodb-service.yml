@@ -43,6 +43,6 @@ auth:
 environment: prod
 
 inter-microservice:
-  webfluxmongodb-service: http://webflux-mongodb-service/student/
+  webflux-mongodb-service: http://webflux-mongodb-service/student/
   employee-service: http://employee-service/employee/
    
